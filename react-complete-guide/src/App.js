@@ -9,7 +9,8 @@ class App extends Component {
             { name: 'Britt', age: 32 },
             { name: 'Paul', age: 58 }
         ],
-        otherState: 'some other value'
+        otherState: 'some other value',
+        showPersons: false
     };
 
     handleSwitchName = newName => {
@@ -32,6 +33,13 @@ class App extends Component {
         });
     }
 
+    togglePersons = () => {
+        const doesShow = this.state.showPersons;
+        this.setState({
+            showPersons: !doesShow
+        });
+    }
+
 	render() {
         const style = {
             backgroundColor: 'white',
@@ -41,30 +49,41 @@ class App extends Component {
             cursor: 'pointer'
         };
 
+        let persons = null;
+
+        if (this.state.showPersons) {
+            persons = (
+                <div>
+                    <Person 
+                        name={this.state.persons[0].name} 
+                        age={this.state.persons[0].age}
+                        click={this.handleSwitchName.bind(this, 'Tony Chinstraps')}
+                        change={this.handleNameChange}
+                    >My Hobbies: Sports
+                    </Person>
+                    <Person 
+                        name={this.state.persons[1].name} 
+                        age={this.state.persons[1].age} 
+                    />
+                    <Person 
+                        name={this.state.persons[2].name} 
+                        age={this.state.persons[2].age} 
+                    />
+                </div>
+            );
+        }
+
 		return (
 			<div className="app">
 				<h1>Hi, I'm a React App</h1>
 				<p>This is really working!</p>
                 <button 
                     style={style}
-                    onClick={() => this.handleSwitchName('Tony')}
-                >Switch Name
-                </button>
-				<Person 
-                    name={this.state.persons[0].name} 
-                    age={this.state.persons[0].age}
-                    click={this.handleSwitchName.bind(this, 'Tony Chinstraps')}
-                    change={this.handleNameChange}
-				>My Hobbies: Sports
-				</Person>
-				<Person 
-                    name={this.state.persons[1].name} 
-                    age={this.state.persons[1].age} 
-				/>
-				<Person 
-                    name={this.state.persons[2].name} 
-                    age={this.state.persons[2].age} 
-				/>
+                    onClick={this.togglePersons}
+                >
+                    Toggle Persons
+                </button>  
+                {persons}
 			</div>
 		);
 	}
