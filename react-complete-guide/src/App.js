@@ -15,8 +15,8 @@ class App extends Component {
 
     handleNameChange = (event, id) => {
         //find person index
-        const personIndex = this.state.persons.findIndex(element => {
-            return element.id === id;
+        const personIndex = this.state.persons.findIndex(person => {
+            return person.id === id;
         });
 
         //create copy of person object
