@@ -13,30 +13,30 @@ class App extends Component {
         showPersons: false
     };
 
+    //find person index
+    //create copy of person object
+    //update person name
+    //create copy of persons array
+    //update person object
+    //update state with new array
     handleNameChange = (event, id) => {
-        //find person index
         const personIndex = this.state.persons.findIndex(person => {
             return person.id === id;
         });
-
-        //create copy of person object
         const person = {
             ...this.state.persons[personIndex]
         };
-
-        //update person name
         person.name = event.target.value;
-
-        //create copy of persons array & update person object
         const persons = [...this.state.persons];
         persons[personIndex] = person;
-        
-        //update persons array
         this.setState({
             persons
         });
     }
 
+    //create copy of persons array
+    //update persons array
+    //update state with new array
     handleDeletePerson = personIndex => {
         const persons = [...this.state.persons];
         persons.splice(personIndex, 1);
@@ -45,6 +45,8 @@ class App extends Component {
         });
     }
 
+    //create copy of showPersons prop
+    //update state with opposite value
     togglePersons = () => {
         const doesShow = this.state.showPersons;
         this.setState({
@@ -54,15 +56,16 @@ class App extends Component {
 
 	render() {
         const style = {
-            backgroundColor: 'white',
+            backgroundColor: 'green',
+            color: 'white',
             font: 'inherit',
             border: '1px solid blue',
             padding: '8px',
             cursor: 'pointer'
         };
 
+        //dynamically display persons & change style
         let persons = null;
-
         if (this.state.showPersons) {
             persons = (
                 <div>
@@ -77,12 +80,22 @@ class App extends Component {
                     })}
                 </div>
             );
+            style.backgroundColor = 'red';
+        }
+
+        //dynamically assign classes
+        const classes = [];
+        if (this.state.persons.length <= 2) {
+            classes.push('red')
+        }
+        if (this.state.persons.length <=1) {
+            classes.push('bold')
         }
 
 		return (
 			<div className="app">
 				<h1>Hi, I'm a React App</h1>
-				<p>This is really working!</p>
+				<p className={classes.join(' ')}>This is really working!</p>
                 <button 
                     style={style}
                     onClick={this.togglePersons}
