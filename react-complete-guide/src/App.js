@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 import './App.css';
 
@@ -61,10 +62,14 @@ class App extends Component {
             font: 'inherit',
             border: '1px solid blue',
             padding: '8px',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            ':hover': {
+                backgroundColor: 'lightgreen',
+                color: 'black'
+            }
         };
 
-        //dynamically display persons & change style
+        //dynamically display persons & change inline style of button
         let persons = null;
         if (this.state.showPersons) {
             persons = (
@@ -80,7 +85,12 @@ class App extends Component {
                     })}
                 </div>
             );
+
             style.backgroundColor = 'red';
+            style[':hover'] = {
+                backgroundColor: 'salmon',
+                color: 'black'
+            }
         }
 
         //dynamically assign classes
@@ -93,19 +103,21 @@ class App extends Component {
         }
 
 		return (
-			<div className="app">
-				<h1>Hi, I'm a React App</h1>
-				<p className={classes.join(' ')}>This is really working!</p>
-                <button 
-                    style={style}
-                    onClick={this.togglePersons}
-                >
-                    Toggle Persons
-                </button>  
-                {persons}
-			</div>
+            <StyleRoot>
+                <div className="app">
+                    <h1>Hi, I'm a React App</h1>
+                    <p className={classes.join(' ')}>This is really working!</p>
+                    <button 
+                        style={style}
+                        onClick={this.togglePersons}
+                    >
+                        Toggle Persons
+                    </button>  
+                    {persons}
+                </div>
+            </StyleRoot>
 		);
 	}
 }
 
-export default App;
+export default Radium(App);
