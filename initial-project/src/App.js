@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Person from './Person/Person';
-import './App.css';
+import styles from './App.module.css';
 
 class App extends Component {
     state = {
@@ -55,7 +55,7 @@ class App extends Component {
     }
 
 	render() {
-        const style = {
+        const buttonStyle = {
             backgroundColor: 'green',
             color: 'white',
             font: 'inherit',
@@ -81,24 +81,24 @@ class App extends Component {
                 </div>
             );
 
-            style.backgroundColor = 'red';
+            buttonStyle.backgroundColor = 'red';
         }
 
         //dynamically assign classes
         const classes = [];
         if (this.state.persons.length <= 2) {
-            classes.push('red')
+            classes.push(styles.red)
         }
         if (this.state.persons.length <=1) {
-            classes.push('bold')
+            classes.push(styles.bold)
         }
 
 		return (
-            <div className="app">
+            <div className={styles.app}>
                 <h1>Hi, I'm a React App</h1>
                 <p className={classes.join(' ')}>This is really working!</p>
                 <button 
-                    style={style}
+                    style={buttonStyle}
                     onClick={this.togglePersons}
                 >
                     Toggle Persons
