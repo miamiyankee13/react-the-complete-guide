@@ -55,17 +55,10 @@ class App extends Component {
     }
 
 	render() {
-        const buttonStyle = {
-            backgroundColor: 'green',
-            color: 'white',
-            font: 'inherit',
-            border: '1px solid blue',
-            padding: '8px',
-            cursor: 'pointer'
-        };
-
-        //dynamically display persons & change inline style of button
+        //dynamically display persons & button class
         let persons = null;
+        let buttonClass = '';
+
         if (this.state.showPersons) {
             persons = (
                 <div>
@@ -81,7 +74,7 @@ class App extends Component {
                 </div>
             );
 
-            buttonStyle.backgroundColor = 'red';
+            buttonClass = styles.red;
         }
 
         //dynamically assign classes
@@ -97,10 +90,7 @@ class App extends Component {
             <div className={styles.app}>
                 <h1>Hi, I'm a React App</h1>
                 <p className={classes.join(' ')}>This is really working!</p>
-                <button 
-                    style={buttonStyle}
-                    onClick={this.togglePersons}
-                >
+                <button onClick={this.togglePersons} className={buttonClass}>
                     Toggle Persons
                 </button>  
                 {persons}
