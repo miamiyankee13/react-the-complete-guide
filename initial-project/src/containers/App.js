@@ -4,6 +4,11 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import styles from './App.module.css';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        console.log('[App.js] constructor');
+    }
+    
     state = {
         persons: [
             { id: '1', name: 'Anthony', age: 28 },
@@ -13,6 +18,15 @@ class App extends Component {
         otherState: 'some other value',
         showPersons: false
     };
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('[App.js] getDerivedStateFromProps', props);
+        return state;
+    }
+
+    componentDidMount() {
+        console.log('[App.js] componentDidMount');
+    }
 
     //find person index
     //create copy of person object
@@ -56,6 +70,7 @@ class App extends Component {
     }
 
 	render() {
+        console.log('[App.js] render')
         //dynamically display persons
         let persons = null;
 
