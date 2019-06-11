@@ -1,0 +1,31 @@
+import React from 'react';
+import styles from './Cockpit.module.css'
+
+const Cockpit = props => {
+    //dynamically assign classes
+    const classes = [];
+    let buttonClass = '';
+
+    if (props.showPersons) {
+        buttonClass = styles.red;
+    }
+
+    if (props.persons.length <= 2) {
+        classes.push(styles.red)
+    }
+    if (props.persons.length <=1) {
+        classes.push(styles.bold)
+    }
+
+    return (
+        <div className={styles.cockpit}>
+            <h1>Hi, I'm a React App</h1>
+            <p className={classes.join(' ')}>This is really working!</p>
+            <button onClick={props.click} className={buttonClass}>
+                Toggle Persons
+            </button>
+        </div> 
+    );
+}
+
+export default Cockpit;
