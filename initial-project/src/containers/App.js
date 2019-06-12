@@ -17,7 +17,8 @@ class App extends Component {
         ],
         otherState: 'some other value',
         showPersons: false,
-        showCockpit: true
+        showCockpit: true,
+        changeCounter: 0
     };
 
     static getDerivedStateFromProps(props, state) {
@@ -43,7 +44,7 @@ class App extends Component {
     //update person name
     //create copy of persons array
     //update person object
-    //update state with new array
+    //update state with new array & counter value
     handleNameChange = (event, id) => {
         const personIndex = this.state.persons.findIndex(person => {
             return person.id === id;
@@ -54,8 +55,12 @@ class App extends Component {
         person.name = event.target.value;
         const persons = [...this.state.persons];
         persons[personIndex] = person;
-        this.setState({
-            persons
+
+        this.setState((prevState, props) => {
+            return {
+                persons,
+                changeCounter: prevState.changeCounter + 1
+            };
         });
     }
 
