@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Modal.module.css';
 
 const Modal = props => (
-    <div className={styles.modal}>
+    <div className={props.show ? [styles.modal, styles.showModal].join(' ') : styles.modal}>
         {props.children}
     </div>
 );
