@@ -5,7 +5,7 @@ import styles from './Layout.module.css';
 
 class Layout extends Component {
     state = {
-        showMobileNav: true
+        showMobileNav: false
     };
 
     handleMobileNavClosed = () => {
@@ -14,10 +14,16 @@ class Layout extends Component {
         });
     }
 
+    handleMobileNavToggle = () => {
+        this.setState(prevState => {
+            return { showMobileNav: !prevState.showMobileNav };
+        });
+    }
+
     render() {
         return (
             <Fragment>
-                <Toolbar />
+                <Toolbar toggleClicked={this.handleMobileNavToggle} />
                 <MobileNavigation open={this.state.showMobileNav} closed={this.handleMobileNavClosed} />
                 <main className={styles.content}>
                     {this.props.children}
