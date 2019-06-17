@@ -6,7 +6,9 @@ import styles from './MobileNavigation.module.css';
 const MobileNavigation = props => {
     return (
         <div className={styles.mobileNavigation}>
-            <Logo />
+            <div className={styles.logo}>
+                <Logo />
+            </div>
             <nav>
                 <NavigationItems />
             </nav>

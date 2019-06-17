@@ -19,6 +19,10 @@
     transform: translateX(-100%);
 }
 
+.logo {
+    height: 11%;
+}
+
 @media (min-width: 500px) {
     .mobileNavigation {
         display: none;
