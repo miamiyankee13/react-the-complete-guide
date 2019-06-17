@@ -8,12 +8,6 @@ class Layout extends Component {
         showMobileNav: false
     };
 
-    handleMobileNavClosed = () => {
-        this.setState({
-            showMobileNav: false
-        });
-    }
-
     handleMobileNavToggle = () => {
         this.setState(prevState => {
             return { showMobileNav: !prevState.showMobileNav };
@@ -24,7 +18,7 @@ class Layout extends Component {
         return (
             <Fragment>
                 <Toolbar toggleClicked={this.handleMobileNavToggle} />
-                <MobileNavigation open={this.state.showMobileNav} closed={this.handleMobileNavClosed} />
+                <MobileNavigation open={this.state.showMobileNav} closed={this.handleMobileNavToggle} />
                 <main className={styles.content}>
                     {this.props.children}
                 </main>
