@@ -5,7 +5,7 @@ import styles from './Modal.module.css';
 const Modal = props => (
     <Fragment>
         <Backdrop show={props.show} clicked={props.modalClosed} />
-        <div className={props.show ? [styles.modal, styles.showModal].join(' ') : styles.modal}>
+        <div className={props.show ? `${styles.modal} ${styles.showModal}` : styles.modal}>
             {props.children}
         </div>
     </Fragment>
