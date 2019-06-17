@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import Toolbar from '../Navigation/Toolbar/Toolbar';
-import MobileNavigation from '../Navigation/MobileNavigation/MobileNavigation';
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import MobileNavigation from '../../components/Navigation/MobileNavigation/MobileNavigation';
 import styles from './Layout.module.css';
 
 class Layout extends Component {
