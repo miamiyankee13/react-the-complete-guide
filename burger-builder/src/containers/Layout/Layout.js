@@ -8,6 +8,18 @@ class Layout extends Component {
         showMobileNav: false
     };
 
+    componentDidMount() {
+        window.addEventListener('resize', () => {
+            this.setState(prevState => {
+                return { showMobileNav: window.innerWidth < 600 && prevState.showMobileNav };
+            });
+        });
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState.showMobileNav !== this.state.showMobileNav;
+    }
+
     handleMobileNavToggle = () => {
         this.setState(prevState => {
             return { showMobileNav: !prevState.showMobileNav };
@@ -15,6 +27,7 @@ class Layout extends Component {
     }
 
     render() {
+        console.log('[Layout.js] Render');
         return (
             <Fragment>
                 <Toolbar toggleClicked={this.handleMobileNavToggle} />
