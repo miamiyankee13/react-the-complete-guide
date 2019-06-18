@@ -27,7 +27,6 @@ class Layout extends Component {
     }
 
     render() {
-        console.log('[Layout.js] Render');
         return (
             <Fragment>
                 <Toolbar toggleClicked={this.handleMobileNavToggle} />
