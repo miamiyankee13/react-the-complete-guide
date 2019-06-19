@@ -16,17 +16,27 @@ const INGREDIENT_PRICES = {
 
 class BurgerBuilder extends Component {
     state = {
-        ingredients: {
-            lettuce: 0,
-            bacon: 0,
-            cheese: 0,
-            meat: 0,
-        },
+        ingredients: null,
         totalPrice: 4,
         purchasable: false,
         purchasing: false,
-        loading: false
+        loading: false,
+        error: false
     };
+
+    componentDidMount() {
+        axios.get('/ingredients.json')
+            .then(response => {
+                this.setState({
+                    ingredients: response.data
+                });
+            })
+            .catch(error => {
+                this.setState({
+                    error: true
+                });
+            });
+    }
 
     //create new array of ingredient values
     //reduce new array to calculate sum of ingredient values
@@ -87,18 +97,24 @@ class BurgerBuilder extends Component {
         this.updatePurchasable(updatedIngredients);
     }
 
+    //set purchasing state to true
     handlePurchase = () => {
         this.setState({
             purchasing: true
         })
     }
 
+    //set purchasing state to false
     handleCancelPurchase = () => {
         this.setState({
             purchasing: false
         });
     }
 
+    //set loading state to true
+    //create order object
+    //submit order object
+    //update loading & purchasing state
     handleContinuePurchase = () => {
         this.setState({
             loading: true
@@ -137,19 +153,38 @@ class BurgerBuilder extends Component {
     render() {
         //check if ingredients buttons should be disabled
         const disabledInfo = {...this.state.ingredients};
-
         for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0;
         }
+        
+        //declare default values for order summary & burger
+        let orderSummary = null;
+        let burger = this.state.error ? <p>Ingredients can't be loaded</p> : <Spinner />;
 
-        //display order summary or spinner depending on loading state
-        let orderSummary = <OrderSummary 
+        //dynamically create burger & order summary if ingredients exist
+        if (this.state.ingredients) {
+            burger = (
+                <Fragment>
+                    <Burger ingredients={this.state.ingredients} />
+                    <BuildControls 
+                        ingredientAdded={this.handleAddIngredient}
+                        ingredientRemoved={this.handleRemoveIngredient}
+                        disabled={disabledInfo}
+                        price={this.state.totalPrice}
+                        purchasable={this.state.purchasable}
+                        ordered={this.handlePurchase}
+                    />
+                </Fragment>
+            );
+            orderSummary = <OrderSummary 
                                 ingredients={this.state.ingredients}
                                 price={this.state.totalPrice}
                                 cancel={this.handleCancelPurchase}
                                 continue={this.handleContinuePurchase}
-                            />
+                            />;
+        }
 
+        //display spinner if order is submitted
         if (this.state.loading) {
             orderSummary = <Spinner />;
         }
@@ -159,15 +194,7 @@ class BurgerBuilder extends Component {
                 <Modal show={this.state.purchasing} modalClosed={this.handleCancelPurchase}>
                     {orderSummary}
                 </Modal>
-                <Burger ingredients={this.state.ingredients} />
-                <BuildControls 
-                    ingredientAdded={this.handleAddIngredient}
-                    ingredientRemoved={this.handleRemoveIngredient}
-                    disabled={disabledInfo}
-                    price={this.state.totalPrice}
-                    purchasable={this.state.purchasable}
-                    ordered={this.handlePurchase}
-                />
+                {burger}
             </Fragment>
         );
     }
