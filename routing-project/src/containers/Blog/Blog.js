@@ -23,7 +23,7 @@ class Blog extends Component {
                 <Switch>
                     <Route path="/new-post" component={NewPost} />
                     <Route path="/posts" component={Posts} />
-                    <Route path="/" render={() => <h1>Welcome! Let's learn React Router!</h1>} />
+                    <Route path="/" render={() => <h1 style={{textAlign: "center"}}>Welcome! Let's learn React Router!</h1>} />
                 </Switch>
             </div>
         );
