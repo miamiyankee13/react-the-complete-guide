@@ -128,7 +128,7 @@ class BurgerBuilder extends Component {
                 address: {
                     street: '123 Main Street',
                     zipcode: '12345',
-                    country: 'United State'
+                    country: 'United States'
                 },
                 email: 'test@test.com'
             },
