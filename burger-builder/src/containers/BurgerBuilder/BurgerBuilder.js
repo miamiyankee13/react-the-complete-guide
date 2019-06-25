@@ -111,11 +111,15 @@ class BurgerBuilder extends Component {
         });
     }
 
-    //set loading state to true
-    //create order object
-    //submit order object
-    //update loading & purchasing state
+    //create query params array of strings
+    //join array using & to create query string
+    //push to new path with query string in URL (allows us to decode query string in receiving component)
     handleContinuePurchase = () => {
+        //set loading state to true
+        //create order object
+        //submit order object
+        //update loading & purchasing state
+
         // this.setState({
         //     loading: true
         // });
@@ -148,7 +152,15 @@ class BurgerBuilder extends Component {
         //             purchasing: false
         //         });
         //     });
-        this.props.history.push('/checkout');
+        const queryParams = [];
+        for (let ingredient in this.state.ingredients) {
+            queryParams.push(`${encodeURIComponent(ingredient)}=${encodeURIComponent(this.state.ingredients[ingredient])}`);
+        }
+        const queryString = queryParams.join('&');
+        this.props.history.push({
+            pathname: '/checkout',
+            search: `?${queryString}`
+        });
     }
 
     render() {
