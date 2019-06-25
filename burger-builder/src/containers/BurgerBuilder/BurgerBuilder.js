@@ -20,7 +20,6 @@ class BurgerBuilder extends Component {
         totalPrice: 4,
         purchasable: false,
         purchasing: false,
-        loading: false,
         error: false
     };
 
@@ -112,50 +111,15 @@ class BurgerBuilder extends Component {
     }
 
     //create query params array of strings
+    //add total price to query params
     //join array using & to create query string
     //push to new path with query string in URL (allows us to decode query string in receiving component)
     handleContinuePurchase = () => {
-        //set loading state to true
-        //create order object
-        //submit order object
-        //update loading & purchasing state
-
-        // this.setState({
-        //     loading: true
-        // });
-        
-        // const order = {
-        //     ingredients: this.state.ingredients,
-        //     price: this.state.totalPrice,
-        //     customer: {
-        //         name: 'Anthony Damico',
-        //         address: {
-        //             street: '123 Main Street',
-        //             zipcode: '12345',
-        //             country: 'United States'
-        //         },
-        //         email: 'test@test.com'
-        //     },
-        //     deliveryMethod: 'fastest'
-        // }
-        
-        // axios.post('/orders.json', order)
-        //     .then(response => {
-        //         this.setState({
-        //             loading: false,
-        //             purchasing: false
-        //         });
-        //     })
-        //     .catch(error => {
-        //         this.setState({
-        //             loading: false,
-        //             purchasing: false
-        //         });
-        //     });
         const queryParams = [];
         for (let ingredient in this.state.ingredients) {
             queryParams.push(`${encodeURIComponent(ingredient)}=${encodeURIComponent(this.state.ingredients[ingredient])}`);
         }
+        queryParams.push(`price=${this.state.totalPrice}`);
         const queryString = queryParams.join('&');
         this.props.history.push({
             pathname: '/checkout',
@@ -195,11 +159,6 @@ class BurgerBuilder extends Component {
                                 cancel={this.handleCancelPurchase}
                                 continue={this.handleContinuePurchase}
                             />;
-        }
-
-        //display spinner if order is submitted
-        if (this.state.loading) {
-            orderSummary = <Spinner />;
         }
 
         return (
