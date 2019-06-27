@@ -3,11 +3,16 @@ import styles from './Input.module.css';
 
 const Input = props => {
     let inputElement = null;
+    const inputClasses = [styles.inputElement];
+
+    if (props.invalid && props.shouldValidate) {
+        inputClasses.push(styles.invalid);
+    }
 
     switch(props.elementType) {
         case "input":
             inputElement = <input 
-                                className={styles.inputElement}
+                                className={inputClasses.join(' ')}
                                 id={props.elementConfig.name} 
                                 {...props.elementConfig} 
                                 value={props.value}
@@ -16,7 +21,7 @@ const Input = props => {
             break;
         case "textarea":
             inputElement = <textarea 
-                                className={styles.inputElement} 
+                                className={inputClasses.join(' ')} 
                                 id={props.elementConfig.name} 
                                 {...props.elementConfig} 
                                 value={props.value} 
@@ -25,8 +30,7 @@ const Input = props => {
             break;
         case "select":
             inputElement = (
-                <select className={styles.inputElement} id={props.elementConfig.name} value={props.value} onChange={props.changed}>
-                    <option value=''>--Select Delivery Method--</option>
+                <select className={inputClasses.join(' ')} id={props.elementConfig.name} value={props.value} onChange={props.changed}>
                     {props.elementConfig.options.map(option => (
                         <option key={option.value} value={option.value}>
                             {option.display}
@@ -37,7 +41,7 @@ const Input = props => {
             break;
         default:
             inputElement = <input 
-                                className={styles.inputElement}
+                                className={inputClasses.join(' ')}
                                 id={props.elementConfig.name}  
                                 {...props.elementConfig} 
                                 value={props.value}
