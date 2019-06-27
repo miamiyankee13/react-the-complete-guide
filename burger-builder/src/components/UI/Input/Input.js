@@ -12,7 +12,6 @@ const Input = props => {
                                 {...props.elementConfig} 
                                 value={props.value}
                                 onChange={props.changed}
-                                required 
                             />;
             break;
         case "textarea":
@@ -22,12 +21,11 @@ const Input = props => {
                                 {...props.elementConfig} 
                                 value={props.value} 
                                 onChange={props.changed}
-                                required  
                             />;
             break;
         case "select":
             inputElement = (
-                <select className={styles.inputElement} id={props.elementConfig.name} value={props.value} onChange={props.changed} required>
+                <select className={styles.inputElement} id={props.elementConfig.name} value={props.value} onChange={props.changed}>
                     <option value=''>--Select Delivery Method--</option>
                     {props.elementConfig.options.map(option => (
                         <option key={option.value} value={option.value}>
@@ -44,7 +42,6 @@ const Input = props => {
                                 {...props.elementConfig} 
                                 value={props.value}
                                 onChange={props.changed}
-                                required   
                             />;
     }
 
