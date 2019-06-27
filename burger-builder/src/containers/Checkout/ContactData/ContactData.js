@@ -89,7 +89,8 @@ class ContactData extends Component {
                     ],
                     name: 'Delivery Method'
                 },
-                value: '',
+                value: 'fastest',
+                validation: {},
                 valid: true
             }
         },
