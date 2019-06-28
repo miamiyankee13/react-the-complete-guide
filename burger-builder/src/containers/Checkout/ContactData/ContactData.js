@@ -99,9 +99,10 @@ class ContactData extends Component {
     }
 
     //set loading state to true
+    //create form data object
     //create order object
     //submit order object
-    //update loading & purchasing state
+    //update loading & navigate to root page
     handleOrder = event => {
         event.preventDefault();
         this.setState({
@@ -133,6 +134,7 @@ class ContactData extends Component {
             });
     }
 
+    //validate all ruls
     validationCheck(value, rules) {
         let isValid = true;
 
@@ -151,6 +153,13 @@ class ContactData extends Component {
         return isValid;
     }
 
+    //create copy of order form object
+    //create copy of specific form element
+    //update value of specific form element
+    //update valid of specific form element
+    //update touched of specific form element
+    //check if all inputs are valid
+    //update order form & form is valid
     handleInputChange = (event, inputId) => {
         const updatedOrderForm = {
             ...this.state.orderForm
