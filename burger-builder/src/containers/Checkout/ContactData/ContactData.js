@@ -134,7 +134,7 @@ class ContactData extends Component {
             });
     }
 
-    //validate all ruls
+    //validate all rules
     validationCheck(value, rules) {
         let isValid = true;
 
