@@ -29,10 +29,12 @@ class Checkout extends Component {
         });
     }
 
+    //go back to pervious page
     handleCancelCheckout = () => {
         this.props.history.goBack();
     }
 
+    //display contact data form
     handleContinueCheckout = () => {
         this.props.history.replace('/checkout/contact-data');
     }
