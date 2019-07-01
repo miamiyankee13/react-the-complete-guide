@@ -186,6 +186,7 @@ class ContactData extends Component {
     }
 
     render() {
+        //create form elements array from state object
         const formElementsArray = [];
         for (let key in this.state.orderForm) {
             formElementsArray.push({
@@ -194,6 +195,7 @@ class ContactData extends Component {
             });
         }
 
+        //map over form elements array to create all inputs
         let form = (
             <form onSubmit={this.handleOrder}>
                 {formElementsArray.map(formElement => (
@@ -212,6 +214,7 @@ class ContactData extends Component {
             </form>
         );
 
+        //display spinner if loading
         if (this.state.loading) {
             form = <Spinner />
         }
