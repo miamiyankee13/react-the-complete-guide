@@ -2,9 +2,11 @@ import React from 'react';
 import styles from './Input.module.css';
 
 const Input = props => {
+    //create input element & input classes array
     let inputElement = null;
     const inputClasses = [styles.inputElement];
 
+    //check if invalid class should be added to input classes array
     if (props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push(styles.invalid);
     }
