@@ -11,6 +11,7 @@ const Input = props => {
         inputClasses.push(styles.invalid);
     }
 
+    //create input elements based on element type provided
     switch(props.elementType) {
         case "input":
             inputElement = <input 
