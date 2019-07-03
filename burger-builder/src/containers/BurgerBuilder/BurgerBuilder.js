@@ -7,6 +7,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
 
+//create ingredient prices for price tracking
 const INGREDIENT_PRICES = {
     lettuce: 0.5,
     cheese: 0.4,
