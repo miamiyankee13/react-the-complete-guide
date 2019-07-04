@@ -9,6 +9,7 @@ class Orders extends Component {
         loading: true
     }
 
+    //fetch all orders from firebase
     componentDidMount() {
         axios.get('/orders.json')
             .then(res => {
