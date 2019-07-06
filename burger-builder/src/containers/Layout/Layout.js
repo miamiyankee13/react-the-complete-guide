@@ -8,6 +8,7 @@ class Layout extends Component {
         showMobileNav: false
     };
 
+    //event listener for backdrop removal if open and window is resized
     componentDidMount() {
         window.addEventListener('resize', () => {
             this.setState(prevState => {
@@ -16,10 +17,12 @@ class Layout extends Component {
         });
     }
 
+    //avoid re-rendering on every window resize
     shouldComponentUpdate(nextProps, nextState) {
         return nextState.showMobileNav !== this.state.showMobileNav;
     }
 
+    //toggle mobile nav status
     handleMobileNavToggle = () => {
         this.setState(prevState => {
             return { showMobileNav: !prevState.showMobileNav };
